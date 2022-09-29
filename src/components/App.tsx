@@ -1,11 +1,14 @@
 import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <p>Hello my friend!</p>
-    </div>
+    <Routes>
+      <Route path="/" />
+      <Route path="/home" />
+      <Route path="*" element={<Navigate to="/home" />} />
+    </Routes>
   );
-}
+};
 
 export default App;
