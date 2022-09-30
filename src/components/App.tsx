@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import AlbumPage from '../pages/AlbumPage';
+import HomePage from '../pages/HomePage';
 import Header from './header/Header';
 
 const App: React.FC = () => {
@@ -7,8 +9,8 @@ const App: React.FC = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/" />
-        <Route path="/home" />
+        <Route path="/" element={<HomePage />} />
+        <Route path="albums" element={<AlbumPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
