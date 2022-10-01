@@ -3,9 +3,9 @@ import axios from 'axios';
 axios.defaults.baseURL =
   'https://q7jgr6jylg.execute-api.eu-west-2.amazonaws.com/dev';
 
-const saveToken = {
+export const saveToken = {
   set(token: string) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    axios.defaults.headers.common.Authorization = `${token}`;
   },
   unset() {
     axios.defaults.headers.common.Authorization = '';

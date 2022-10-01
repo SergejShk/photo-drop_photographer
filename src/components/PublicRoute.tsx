@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../hooks/reduxHooks';
 
@@ -9,7 +9,11 @@ interface IProps {
 const PublicRoute: React.FC<IProps> = ({ children }) => {
   const isLoggedIn = useAppSelector((state: any) => state.auth.isLoggedIn);
 
-  return <>{isLoggedIn ? <Navigate to="/albums" /> : children}</>;
+  return (
+    <Suspense fallback={<p>Loading</p>}>
+      {isLoggedIn ? <Navigate to="/albums" /> : children}
+    </Suspense>
+  );
 };
 
 export default PublicRoute;

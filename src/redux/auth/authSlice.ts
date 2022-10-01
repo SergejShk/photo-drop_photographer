@@ -1,3 +1,4 @@
+import { getUserDataThunk } from './../userData/userDataOperations';
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { logInThunk } from './authOperations';
 
@@ -33,6 +34,15 @@ const authSlice = createSlice({
       .addCase(logInThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.token;
         state.isLoggedIn = true;
+        state.isLoading = false;
+      })
+      .addCase(getUserDataThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getUserDataThunk.fulfilled, state => {
+        state.isLoggedIn = true;
+        state.isLoading = false;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.isLoading = false;
