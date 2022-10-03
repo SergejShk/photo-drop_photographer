@@ -1,15 +1,17 @@
 import React, { lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import Container from './container/Container';
 import Header from './header/Header';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
+const AllAlbumsPage = lazy(() => import('../pages/ALLAlbumsPage'));
 const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 
 const App: React.FC = () => {
   return (
-    <>
+    <Container>
       <Header />
       <Routes>
         <Route
@@ -24,13 +26,21 @@ const App: React.FC = () => {
           path="albums"
           element={
             <PrivateRoute>
+              <AllAlbumsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="albums/:albumName"
+          element={
+            <PrivateRoute>
               <AlbumPage />
             </PrivateRoute>
           }
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </>
+    </Container>
   );
 };
 

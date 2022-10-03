@@ -13,7 +13,7 @@ const userDataSlice = createSlice({
 
   extraReducers: builder => {
     builder.addCase(getUserDataThunk.fulfilled, (state, { payload }) => {
-      state.albums = [...(payload as any)];
+      state.albums = payload as any;
     });
   },
 });
