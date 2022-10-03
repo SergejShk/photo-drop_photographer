@@ -2,7 +2,7 @@ import React from 'react';
 import AlbumsList from '../components/albumsList/AlbumsList';
 import AlbumsTitleBlock from '../components/albumsTitleBlock/AlbumsTitleBlock';
 
-const AllAlbumsPage: React.FC = () => {
+const AlbumsPage: React.FC = () => {
   return (
     <section>
       <AlbumsTitleBlock />
@@ -11,4 +11,4 @@ const AllAlbumsPage: React.FC = () => {
   );
 };
 
-export default AllAlbumsPage;
+export default AlbumsPage;

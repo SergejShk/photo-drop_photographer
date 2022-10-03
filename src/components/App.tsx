@@ -6,7 +6,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
-const AllAlbumsPage = lazy(() => import('../pages/AllAlbumsPage'));
+const AlbumsPage = lazy(() => import('../pages/AlbumsPage'));
 const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 
 const App: React.FC = () => {
@@ -26,7 +26,7 @@ const App: React.FC = () => {
           path="albums"
           element={
             <PrivateRoute>
-              <AllAlbumsPage />
+              <AlbumsPage />
             </PrivateRoute>
           }
         />
