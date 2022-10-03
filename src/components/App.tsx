@@ -6,7 +6,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
-const AllAlbumsPage = lazy(() => import('../pages/ALLAlbumsPage'));
+const AllAlbumsPage = lazy(() => import('../pages/AllAlbumsPage'));
 const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 
 const App: React.FC = () => {

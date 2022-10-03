@@ -1,4 +1,7 @@
-import { getUserDataThunk } from './../userData/userDataOperations';
+import {
+  addNewAlbumThunk,
+  getUserDataThunk,
+} from './../userData/userDataOperations';
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { logInThunk } from './authOperations';
 
@@ -42,6 +45,12 @@ const authSlice = createSlice({
       })
       .addCase(getUserDataThunk.fulfilled, state => {
         state.isLoggedIn = true;
+        state.isLoading = false;
+      })
+      .addCase(addNewAlbumThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(addNewAlbumThunk.fulfilled, state => {
         state.isLoading = false;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {

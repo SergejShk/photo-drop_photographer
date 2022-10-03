@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import { BackdropStyled } from './AddAlbumModal.styled';
+import { addNewAlbumThunk } from '../../redux/userData/userDataOperations';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   closeModal: () => void;
@@ -12,6 +15,9 @@ const AddAlbumModal: React.FC<IProps> = ({ closeModal }) => {
   const [name, setName] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [date, setDate] = useState<string>(normalizedDate);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onOverlayClick = (e: React.MouseEvent<HTMLElement>): void => {
     e.target === e.currentTarget && closeModal();
@@ -25,23 +31,26 @@ const AddAlbumModal: React.FC<IProps> = ({ closeModal }) => {
     if (name === 'date') setDate(value);
   };
 
-  //   const handleSubmit = (e: React.FormEvent) => {
-  //     e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  //     dispatch(logInThunk({ email, password }));
+    dispatch(addNewAlbumThunk({ name, location, date }));
 
-  //     resetForm();
-  //   };
+    navigate(`/albums/${name}`);
+    resetForm();
+    closeModal();
+  };
 
-  //   const resetForm = () => {
-  //     setName('');
-  //     setLocation('');
-  //   };
+  const resetForm = () => {
+    setName('');
+    setLocation('');
+    setDate(normalizedDate);
+  };
 
   return (
     <BackdropStyled onClick={onOverlayClick}>
       <div className="modal">
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
             className="addAlbum__input"
             type="text"
