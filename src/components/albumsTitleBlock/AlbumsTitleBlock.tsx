@@ -17,7 +17,7 @@ const AlbumsTitleBlock: React.FC = () => {
 
   return (
     <ContainerStyled>
-      <h2 className="title">Albums</h2>
+      <h2 className="title">All albums</h2>
       <button className="btn" onClick={handleClick}>
         <svg className="icon">
           <use href={sprite + '#icon-plus'} />

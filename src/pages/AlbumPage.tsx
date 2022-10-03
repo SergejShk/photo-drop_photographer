@@ -1,7 +1,8 @@
 import React from 'react';
+import AlbumBar from '../components/albumBar/AlbumBar';
 
 const AlbumPage: React.FC = () => {
-  return <div>ALBUM</div>;
+  return <AlbumBar />;
 };
 
 export default AlbumPage;
