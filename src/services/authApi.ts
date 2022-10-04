@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.baseURL =
-  'https://q7jgr6jylg.execute-api.eu-west-2.amazonaws.com/dev';
+  'https://77hfz4zquh.execute-api.eu-west-2.amazonaws.com/dev';
 
 export const saveToken = {
   set(token: string) {

@@ -8,7 +8,6 @@ import sprite from '../../assets/sprite.svg';
 
 const AlbumsList: React.FC = () => {
   const albums = useAppSelector(getAllAlbums);
-  console.log(albums);
 
   return (
     <AlbumListStyled>
