@@ -1,7 +1,7 @@
 import { RootState } from './../store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addAlbum, getUserDataApi } from './../../services/userDataApi';
-import type { Albums, NewAlbum } from '../../types/Album';
+import { getUserDataApi } from './../../services/userDataApi';
+import type { Albums } from '../../types/Album';
 
 export const getUserDataThunk = createAsyncThunk<
   Albums,
@@ -19,20 +19,6 @@ export const getUserDataThunk = createAsyncThunk<
     const data = await getUserDataApi(persistedToken);
 
     return data;
-  } catch (error: any) {
-    return rejectWithValue(error.message);
-  }
-});
-
-export const addNewAlbumThunk = createAsyncThunk<
-  string,
-  NewAlbum,
-  { rejectValue: string }
->('albums/addAlbum', async (newAlbum, { rejectWithValue }) => {
-  try {
-    const res = await addAlbum(newAlbum);
-
-    return res;
   } catch (error: any) {
     return rejectWithValue(error.message);
   }

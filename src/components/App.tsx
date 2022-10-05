@@ -31,7 +31,7 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path="albums/:albumName"
+          path="albums/:albumId"
           element={
             <PrivateRoute>
               <AlbumPage />

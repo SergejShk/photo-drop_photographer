@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import albumReducer from './album/albumSlice';
 import authReducer from './auth/authSlice';
 import userDataReducer from './userData/userDataSlice';
 
@@ -22,6 +23,7 @@ const authPersistConfig = {
 const reducers = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   userData: userDataReducer,
+  album: albumReducer,
 });
 
 const store = configureStore({

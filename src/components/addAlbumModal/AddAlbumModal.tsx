@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import { BackdropStyled } from './AddAlbumModal.styled';
-import { addNewAlbumThunk } from '../../redux/userData/userDataOperations';
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import { useNavigate } from 'react-router-dom';
+import { addNewAlbumThunk } from '../../redux/album/albumOperations';
+import { BackdropStyled } from './AddAlbumModal.styled';
 
 interface IProps {
   closeModal: () => void;
@@ -17,7 +16,6 @@ const AddAlbumModal: React.FC<IProps> = ({ closeModal }) => {
   const [date, setDate] = useState<string>(normalizedDate);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onOverlayClick = (e: React.MouseEvent<HTMLElement>): void => {
     e.target === e.currentTarget && closeModal();
@@ -36,7 +34,6 @@ const AddAlbumModal: React.FC<IProps> = ({ closeModal }) => {
 
     dispatch(addNewAlbumThunk({ name, location, date }));
 
-    navigate(`/albums/${name}`);
     resetForm();
     closeModal();
   };

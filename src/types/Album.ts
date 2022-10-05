@@ -14,3 +14,12 @@ export type NewAlbum = {
   location: string;
   date: string;
 };
+
+export type CurrentAlbum = {
+  albumId: string;
+  name: string;
+  userId: number | null;
+  location: string;
+  date: string;
+  path: string;
+};

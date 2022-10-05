@@ -1,9 +1,9 @@
+import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  addNewAlbumThunk,
   getUserDataThunk,
 } from './../userData/userDataOperations';
-import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { logInThunk } from './authOperations';
+import { addNewAlbumThunk } from '../album/albumOperations';
 
 type Auth = {
   accessToken: string;
