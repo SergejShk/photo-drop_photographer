@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { getAllAlbums } from '../../redux/userData/userDataSelectors';
+import Loader from '../loader/Loader';
 import { AlbumListStyled } from './AlbumList.styled';
 import sprite from '../../assets/sprite.svg';
 
@@ -13,7 +14,7 @@ const AlbumsList: React.FC = () => {
   return (
     <>
       {isLoading ? (
-        <p>Loading</p>
+        <Loader />
       ) : (
         <AlbumListStyled>
           {albums.map((album: any) => {

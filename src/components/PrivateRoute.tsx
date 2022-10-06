@@ -2,6 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { getUserDataThunk } from '../redux/userData/userDataOperations';
+import Loader from './loader/Loader';
 
 interface IProps {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ const PrivateRoute: React.FC<IProps> = ({ children }) => {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<p>Loading</p>}>
+    <Suspense fallback={<Loader/>}>
       {isLoggedIn ? children : <Navigate to="/" />}
     </Suspense>
   );
