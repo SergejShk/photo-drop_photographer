@@ -11,7 +11,7 @@ const AlbumBar: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
-    params.albumName && getAlbumData(params.albumName);
+    params.albumId && getAlbumData(params.albumId);
   };
 
   return (

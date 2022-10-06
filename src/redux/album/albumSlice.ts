@@ -18,8 +18,6 @@ const albumSlice = createSlice({
 
   extraReducers: builder => {
     builder.addCase(addNewAlbumThunk.fulfilled, (state, { payload }) => {
-      console.log(payload);
-
       state.albumId = payload.albumId;
       state.name = payload.name;
       state.userId = payload.userId;
