@@ -34,7 +34,7 @@ export const AlbumContainerStyled = styled.div`
     letter-spacing: 0.03em;
     color: #ffffff;
     background: #3300cc;
-    border-radius: 50px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
     transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1);

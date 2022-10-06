@@ -1,18 +1,17 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { getAlbumData } from '../../services/userDataApi';
+import { Link } from 'react-router-dom';
+// import { getAlbumData } from '../../services/userDataApi';
 import { AlbumContainerStyled } from './AlbumBar.styled';
 import sprite from '../../assets/sprite.svg';
-import InputLoadFiles from '../inputLoadFiles/InputLoadFiles';
 
 const AlbumBar: React.FC = () => {
-  const params = useParams();
+  // const params = useParams();
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+  // const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
 
-    params.albumId && getAlbumData(params.albumId);
-  };
+  //   params.albumId && getAlbumData(params.albumId);
+  // };
 
   return (
     <AlbumContainerStyled>
@@ -22,10 +21,9 @@ const AlbumBar: React.FC = () => {
         </svg>{' '}
         Go back
       </Link>
-      <button type="submit" className="btn" onClick={handleClick}>
+      {/* <button type="submit" className="btn" onClick={handleClick}>
         Get photo
-      </button>
-      <InputLoadFiles />
+      </button> */}
     </AlbumContainerStyled>
   );
 };

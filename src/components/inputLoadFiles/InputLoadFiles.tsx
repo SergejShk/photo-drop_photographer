@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Uppy from '@uppy/core';
 import AwsS3 from '@uppy/aws-s3';
 import { DragDrop } from '@uppy/react';
-import { LabelLoadFilesStyled } from './labelLoadFiles.styled';
+import { ContainerLoadFilesStyled } from './labelLoadFiles.styled';
+import { savePhotosWithNumbers } from '../../services/userDataApi';
 
 const InputLoadFiles: React.FC = () => {
+  const [phone, setPhone] = useState<string>('');
+  const [phoneToSend, setPhoneToSend] = useState<string[]>([]);
+  const [sendSeccessful, setSendSeccessful] = useState<string>('');
+
   const params = useParams();
   const albumId = params.albumId;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    setSendSeccessful('');
+    setPhone(value);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setPhoneToSend(prev => [...prev, phone]);
+    setPhone('');
+  };
 
   const uppy = new Uppy({
     meta: { type: 'photos' },
@@ -49,29 +68,56 @@ const InputLoadFiles: React.FC = () => {
   });
 
   uppy.on('complete', result => {
-    // post numbers loadedPhotos albumid
+    albumId &&
+      savePhotosWithNumbers({
+        numbers: phoneToSend,
+        photos: loadedPhotos,
+        albumId,
+      });
+
+    setPhoneToSend([]);
+    setSendSeccessful('seccessful');
+
     ids.map(file => uppy.removeFile(file));
     loadedPhotos = [];
     ids = [];
-    console.log('upload successful');
   });
 
   return (
-    <>
-      <LabelLoadFilesStyled>
-        Upload photo
-        <DragDrop
-          className="hidden"
-          uppy={uppy}
-          locale={{
-            strings: {
-              dropHereOr: 'upload',
-              browse: 'browse',
-            },
-          }}
-        />
-      </LabelLoadFilesStyled>
-    </>
+    <ContainerLoadFilesStyled>
+      <form className="formEnterPhone" onSubmit={handleSubmit}>
+        <input
+          className="inputPhone"
+          type="tel"
+          name="phone"
+          placeholder="Enter phone"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+          value={phone}
+          onChange={handleChange}
+        />{' '}
+        <button type="submit" className="btn">
+          Save phone
+        </button>
+      </form>
+      {phoneToSend.length > 0 && (
+        <label className="labelLoadFile">
+          Upload photo
+          <DragDrop
+            className="hidden"
+            uppy={uppy}
+            locale={{
+              strings: {
+                dropHereOr: 'upload',
+                browse: 'browse',
+              },
+            }}
+          />
+        </label>
+      )}
+      {sendSeccessful && <p className='text'>Photos sent successfully</p>}
+    </ContainerLoadFilesStyled>
   );
 };
 
