@@ -4,11 +4,19 @@ import axios from 'axios';
 import Uppy from '@uppy/core';
 import AwsS3 from '@uppy/aws-s3';
 import { DragDrop } from '@uppy/react';
-import { ContainerLoadFilesStyled } from './labelLoadFiles.styled';
 import { savePhotosWithNumbers } from '../../services/userDataApi';
+import {
+  Container,
+  TextInfo,
+  LabelLoadFiles,
+  Form,
+  Button,
+  InputPhone,
+} from './LoadFiles.styled';
 
-const InputLoadFiles: React.FC = () => {
+const LoadFiles: React.FC = () => {
   const [phone, setPhone] = useState<string>('');
+  const [isSavedPhone, setIsSavedPhone] = useState<boolean>(false);
   const [phoneToSend, setPhoneToSend] = useState<string[]>([]);
   const [sendSeccessful, setSendSeccessful] = useState<string>('');
 
@@ -18,6 +26,7 @@ const InputLoadFiles: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
+    setIsSavedPhone(false);
     setSendSeccessful('');
     setPhone(value);
   };
@@ -26,6 +35,7 @@ const InputLoadFiles: React.FC = () => {
     e.preventDefault();
 
     setPhoneToSend(prev => [...prev, phone]);
+    setIsSavedPhone(true);
     setPhone('');
   };
 
@@ -76,6 +86,7 @@ const InputLoadFiles: React.FC = () => {
       });
 
     setPhoneToSend([]);
+    setIsSavedPhone(false);
     setSendSeccessful('seccessful');
 
     ids.map(file => uppy.removeFile(file));
@@ -84,10 +95,15 @@ const InputLoadFiles: React.FC = () => {
   });
 
   return (
-    <ContainerLoadFilesStyled>
-      <form className="formEnterPhone" onSubmit={handleSubmit}>
-        <input
-          className="inputPhone"
+    <Container>
+      <Form onSubmit={handleSubmit}>
+        <TextInfo className={isSavedPhone ? 'active' : ''}>
+          Number saved seccessfully
+          <br />
+          You can enter next number
+        </TextInfo>
+
+        <InputPhone
           type="tel"
           name="phone"
           placeholder="Enter phone"
@@ -96,13 +112,15 @@ const InputLoadFiles: React.FC = () => {
           required
           value={phone}
           onChange={handleChange}
-        />{' '}
-        <button type="submit" className="btn">
+        />
+
+        <Button type="submit" className="btn">
           Save phone
-        </button>
-      </form>
+        </Button>
+      </Form>
+
       {phoneToSend.length > 0 && (
-        <label className="labelLoadFile">
+        <LabelLoadFiles>
           Upload photo
           <DragDrop
             className="hidden"
@@ -114,11 +132,14 @@ const InputLoadFiles: React.FC = () => {
               },
             }}
           />
-        </label>
+        </LabelLoadFiles>
       )}
-      {sendSeccessful && <p className='text'>Photos sent successfully</p>}
-    </ContainerLoadFilesStyled>
+
+      <TextInfo className={sendSeccessful ? 'active' : ''}>
+        Photos sent successfully
+      </TextInfo>
+    </Container>
   );
 };
 
-export default InputLoadFiles;
+export default LoadFiles;

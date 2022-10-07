@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import moment from 'moment';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { addNewAlbumThunk } from '../../redux/album/albumOperations';
-import { BackdropStyled } from './AddAlbumModal.styled';
+import {
+  BackdropStyled,
+  Modal,
+  Input,
+  ButtonSubmit,
+  ButtonClose,
+} from './AddAlbumModal.styled';
 
 interface IProps {
   closeModal: () => void;
@@ -46,36 +53,36 @@ const AddAlbumModal: React.FC<IProps> = ({ closeModal }) => {
 
   return (
     <BackdropStyled onClick={onOverlayClick}>
-      <div className="modal">
+      <Modal>
+        <ButtonClose type="button" onClick={() => closeModal()}>
+          <AiOutlineClose className="icon" />
+        </ButtonClose>
+
         <form onSubmit={handleSubmit}>
-          <input
-            className="addAlbum__input"
+          <Input
             type="text"
             name="name"
             value={name}
             placeholder="Name"
             onChange={handleChange}
           />
-          <input
-            className="addAlbum__input"
+          <Input
             type="text"
             name="location"
             value={location}
             placeholder="Location"
             onChange={handleChange}
           />
-          <input
-            className="addAlbum__input"
+          <Input
+            className="date"
             type="date"
             name="date"
             value={date}
             onChange={handleChange}
           />
-          <button type="submit" className="addAlbum__btn">
-            Save
-          </button>
+          <ButtonSubmit type="submit">Save</ButtonSubmit>
         </form>
-      </div>
+      </Modal>
     </BackdropStyled>
   );
 };

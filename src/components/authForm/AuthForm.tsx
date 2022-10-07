@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
-import { useAppDispatch } from '../../hooks/reduxHooks';
+import React, { useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { logInThunk } from '../../redux/auth/authOperations';
-import { FormAuthStyled } from './AuthForm.styled';
+import { Form, ErrorText, Input, Button } from './AuthForm.styled';
 
 const AuthForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isError, setIsError] = useState<string>('');
 
+  const isErrorStore = useAppSelector((state: any) => state.auth.error);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setIsError(isErrorStore);
+  }, [isErrorStore]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    setIsError('');
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
   };
@@ -21,38 +28,31 @@ const AuthForm: React.FC = () => {
 
     dispatch(logInThunk({ email, password }));
 
-    resetForm();
-  };
-
-  const resetForm = () => {
     setEmail('');
     setPassword('');
   };
 
   return (
-    <FormAuthStyled onSubmit={handleSubmit}>
-      <input
-        className="authForm__input"
+    <Form onSubmit={handleSubmit}>
+      <Input
         type="text"
         name="email"
         value={email}
         placeholder="example@mail.com"
         onChange={handleChange}
       />
-
-      <input
-        className="authForm__input"
+      <Input
         type="password"
         name="password"
         value={password}
         placeholder="password"
         onChange={handleChange}
       />
-
-      <button type="submit" className="authForm__btn">
-        Sign in
-      </button>
-    </FormAuthStyled>
+      <Button type="submit">Sign in</Button>
+      <ErrorText className={isError ? 'error' : ''}>
+        Email or password is wrong
+      </ErrorText>
+    </Form>
   );
 };
 

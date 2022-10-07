@@ -1,5 +1,7 @@
-import React, { lazy } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAppDispatch } from '../hooks/reduxHooks';
+import { getUserDataThunk } from '../redux/userData/userDataOperations';
 import Container from './container/Container';
 import Header from './header/Header';
 import PrivateRoute from './PrivateRoute';
@@ -10,6 +12,12 @@ const AlbumsPage = lazy(() => import('../pages/AlbumsPage'));
 const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getUserDataThunk());
+  }, [dispatch]);
+
   return (
     <Container>
       <Header />

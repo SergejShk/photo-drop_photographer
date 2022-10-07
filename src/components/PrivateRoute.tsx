@@ -17,7 +17,7 @@ const PrivateRoute: React.FC<IProps> = ({ children }) => {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<Loader/>}>
+    <Suspense fallback={<Loader />}>
       {isLoggedIn ? children : <Navigate to="/" />}
     </Suspense>
   );

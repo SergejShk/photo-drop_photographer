@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/reduxHooks';
 import { getAllAlbums } from '../../redux/userData/userDataSelectors';
 import Loader from '../loader/Loader';
-import { AlbumListStyled } from './AlbumList.styled';
+import { List, Item } from './AlbumList.styled';
 import sprite from '../../assets/sprite.svg';
+
+import type { Album } from '../../types/Album';
 
 const AlbumsList: React.FC = () => {
   const albums = useAppSelector(getAllAlbums);
@@ -16,32 +18,32 @@ const AlbumsList: React.FC = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <AlbumListStyled>
-          {albums.map((album: any) => {
+        <List>
+          {albums.map((album: Album) => {
+            const { albumId, name, location, date } = album;
             return (
-              <li className="item" key={album.albumId}>
-                <Link className="link" to={`/albums/${album.albumId}`}>
+              <Item className="item" key={album.albumId}>
+                <Link className="link" to={`/albums/${albumId}`}>
                   <svg className="icon">
                     <use href={sprite + '#icon-images'} />
                   </svg>
                   <div>
                     <p>
-                      <span className="title-text">Name:</span> {album.name}
+                      <b>Name:</b> {name}
                     </p>
                     <p>
-                      <span className="title-text">Location:</span>{' '}
-                      {album.location}
+                      <b>Location:</b> {location}
                     </p>
                     <p>
-                      <span className="title-text">Date:</span>{' '}
-                      {moment(album.date).format('YYYY-MM-DD')}
+                      <b>Date:</b>
+                      {moment(date).format('YYYY-MM-DD')}
                     </p>
                   </div>
                 </Link>
-              </li>
+              </Item>
             );
           })}
-        </AlbumListStyled>
+        </List>
       )}
     </>
   );

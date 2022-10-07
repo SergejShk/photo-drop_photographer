@@ -1,12 +1,12 @@
 import React from 'react';
 import AlbumBar from '../components/albumBar/AlbumBar';
-import InputLoadFiles from '../components/inputLoadFiles/InputLoadFiles';
+import LoadFiles from '../components/loadFiles/LoadFiles';
 
 const AlbumPage: React.FC = () => {
   return (
     <>
       <AlbumBar />
-      <InputLoadFiles />
+      <LoadFiles />
     </>
   );
 };

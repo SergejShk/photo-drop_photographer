@@ -9,7 +9,8 @@ export const AlbumContainerStyled = styled.div`
     padding: 10px;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    color: #3300cc;
+    font-size: 18px;
     font-weight: 500;
     line-height: 1.27;
     letter-spacing: 0.03em;
@@ -17,31 +18,7 @@ export const AlbumContainerStyled = styled.div`
 
     &:hover,
     &:focus {
-      scale: 0.95;
-    }
-  }
-
-  .icon {
-    width: 15px;
-    height: 15px;
-  }
-
-  .btn {
-    cursor: pointer;
-    padding: 5px 10px;
-    font-size: 16px;
-    line-height: 1.27;
-    letter-spacing: 0.03em;
-    color: #ffffff;
-    background: #3300cc;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-    &:hover,
-    &:focus {
-      scale: 0.95;
+      color: #24028b;
     }
   }
 `;

@@ -1,11 +1,22 @@
 import React from 'react';
-import loaderImg from '../../assets/Web-Loading.png';
+import { Oval } from 'react-loader-spinner';
 import { ContainerLoader } from './LoaderContainer.styled';
 
 const Loader: React.FC = () => {
   return (
     <ContainerLoader>
-      <img className='img' src={loaderImg} alt="loader" />
+      <Oval
+        height={50}
+        width={50}
+        color="#3300cc"
+        wrapperStyle={{}}
+        wrapperClass="loader"
+        visible={true}
+        ariaLabel="oval-loading"
+        secondaryColor="#856ec7"
+        strokeWidth={2}
+        strokeWidthSecondary={2}
+      />
     </ContainerLoader>
   );
 };

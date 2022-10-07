@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AddAlbumModal from '../addAlbumModal/AddAlbumModal';
-import sprite from '../../assets/sprite.svg';
-import { ContainerStyled } from './AlbumsTitleBlock.styled';
+import { BiAddToQueue } from 'react-icons/bi';
+import { ContainerStyled, Button, Title } from './AlbumsTitleBlock.styled';
 
 const AlbumsTitleBlock: React.FC = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -18,12 +18,10 @@ const AlbumsTitleBlock: React.FC = () => {
   return (
     <>
       <ContainerStyled>
-        <h2 className="title">All albums</h2>
-        <button className="btn" onClick={handleClick}>
-          <svg className="icon">
-            <use href={sprite + '#icon-plus'} />
-          </svg>
-        </button>
+        <Title>All albums</Title>
+        <Button onClick={handleClick}>
+          <BiAddToQueue size={24} />
+        </Button>
         {isModal && <AddAlbumModal closeModal={closeModal} />}
       </ContainerStyled>
     </>
