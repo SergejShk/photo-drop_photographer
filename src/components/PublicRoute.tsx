@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const PublicRoute: React.FC<IProps> = ({ children }) => {
-  const isLoggedIn = useAppSelector((state: any) => state.auth.isLoggedIn);
+  const isLoggedIn = useAppSelector((state: any) => state.auth.accessToken);
 
   return (
     <Suspense fallback={<Loader />}>

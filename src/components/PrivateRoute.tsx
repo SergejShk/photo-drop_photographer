@@ -1,7 +1,7 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { getUserDataThunk } from '../redux/userData/userDataOperations';
+import { useAppSelector } from '../hooks/reduxHooks';
+
 import Loader from './loader/Loader';
 
 interface IProps {
@@ -9,16 +9,11 @@ interface IProps {
 }
 
 const PrivateRoute: React.FC<IProps> = ({ children }) => {
-  const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector((state: any) => state.auth.isLoggedIn);
-
-  useEffect(() => {
-    dispatch(getUserDataThunk());
-  }, [dispatch]);
+  const isLoggedIn = useAppSelector((state: any) => state.auth.accessToken);
 
   return (
     <Suspense fallback={<Loader />}>
-      {isLoggedIn ? children : <Navigate to="/" />}
+      {isLoggedIn ? children : <Navigate to="/login" />}
     </Suspense>
   );
 };

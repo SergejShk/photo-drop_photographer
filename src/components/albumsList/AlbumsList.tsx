@@ -29,13 +29,15 @@ const AlbumsList: React.FC = () => {
                   </svg>
                   <div>
                     <p>
-                      <b>Name:</b> {name}
+                      <b>Name: </b>
+                      {name}
                     </p>
                     <p>
-                      <b>Location:</b> {location}
+                      <b>Location: </b>
+                      {location}
                     </p>
                     <p>
-                      <b>Date:</b>
+                      <b>Date: </b>
                       {moment(date).format('YYYY-MM-DD')}
                     </p>
                   </div>

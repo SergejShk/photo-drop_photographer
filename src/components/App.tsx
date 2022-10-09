@@ -1,11 +1,10 @@
 import React, { lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAppDispatch } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { getUserDataThunk } from '../redux/userData/userDataOperations';
-import Container from './container/Container';
-import Header from './header/Header';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import SharedLoyaout from './sharedLoyaout/SharedLoyaout';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const AlbumsPage = lazy(() => import('../pages/AlbumsPage'));
@@ -13,14 +12,15 @@ const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state: any) => state.auth.accessToken);
 
   useEffect(() => {
-    dispatch(getUserDataThunk());
-  }, [dispatch]);
+    isLoggedIn && dispatch(getUserDataThunk());
+  }, [dispatch, isLoggedIn]);
 
   return (
-    <Container>
-      <Header />
+    <>
+      <SharedLoyaout />
       <Routes>
         <Route
           path="/"
@@ -46,9 +46,10 @@ const App: React.FC = () => {
             </PrivateRoute>
           }
         />
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </Container>
+    </>
   );
 };
 
