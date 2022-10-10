@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Form, Field } from 'formik';
 
-export const Form = styled.form`
+export const FormStayled = styled(Form)`
   width: 420px;
   display: flex;
   flex-direction: column;
@@ -29,7 +30,7 @@ export const Button = styled.button`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   width: calc(100% - 30px);
   height: 40px;
   background: #f4f4f4;
@@ -47,10 +48,5 @@ export const Input = styled.input`
 `;
 
 export const ErrorText = styled.p`
-  color: transparent;
-  margin-top: 15px;
-
-  &.error {
-    color: #e70e0e;
-  }
+  color: #e70e0e;
 `;

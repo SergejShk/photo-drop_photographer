@@ -1,58 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { Formik, ErrorMessage } from 'formik';
 import { logInThunk } from '../../redux/auth/authOperations';
-import { Form, ErrorText, Input, Button } from './AuthForm.styled';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { authSchema } from '../../utils/validate/authShema';
+import { isErrorState } from '../../redux/auth/authSelectors';
+import { Button, ErrorText, FormStayled, Input } from './AuthForm.styled';
+
+const initialValues = {
+  email: '',
+  password: '',
+};
 
 const AuthForm: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [isError, setIsError] = useState<string>('');
 
-  const isErrorStore = useAppSelector((state: any) => state.auth.error);
+  const isErrorStore = useAppSelector(isErrorState);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setIsError(isErrorStore);
   }, [isErrorStore]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setIsError('');
-    if (name === 'email') setEmail(value);
-    if (name === 'password') setPassword(value);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    dispatch(logInThunk({ email, password }));
-
-    setEmail('');
-    setPassword('');
+  const handleSubmit = (values: any) => {
+    dispatch(logInThunk(values));
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Input
-        type="text"
-        name="email"
-        value={email}
-        placeholder="example@mail.com"
-        onChange={handleChange}
-      />
-      <Input
-        type="password"
-        name="password"
-        value={password}
-        placeholder="password"
-        onChange={handleChange}
-      />
-      <Button type="submit">Sign in</Button>
-      <ErrorText className={isError ? 'error' : ''}>
-        Email or password is wrong
-      </ErrorText>
-    </Form>
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={authSchema}
+        onSubmit={handleSubmit}
+      >
+        <FormStayled>
+          <Input type="text" name="email" placeholder="example@mail.com" />
+          <ErrorMessage name="email">
+            {msg => <ErrorText>{msg}</ErrorText>}
+          </ErrorMessage>
+
+          <Input type="password" name="password" placeholder="password" />
+          <ErrorMessage name="password">
+            {msg => <ErrorText>{msg}</ErrorText>}
+          </ErrorMessage>
+
+          <Button type="submit">Sign in</Button>
+        </FormStayled>
+      </Formik>
+      {isError && <ErrorText>Email or password is wrong</ErrorText>}
+    </>
   );
 };
 

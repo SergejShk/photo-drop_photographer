@@ -6,12 +6,13 @@ import { getAllAlbums } from '../../redux/userData/userDataSelectors';
 import Loader from '../loader/Loader';
 import { List, Item } from './AlbumList.styled';
 import sprite from '../../assets/sprite.svg';
+import { isLoadingStore } from '../../redux/auth/authSelectors';
 
 import type { Album } from '../../types/Album';
 
 const AlbumsList: React.FC = () => {
   const albums = useAppSelector(getAllAlbums);
-  const isLoading = useAppSelector((state: any) => state.auth.isLoading);
+  const isLoading = useAppSelector(isLoadingStore);
 
   return (
     <>

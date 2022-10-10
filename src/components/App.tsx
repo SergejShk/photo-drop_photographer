@@ -1,9 +1,10 @@
 import React, { lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { isExistToken } from '../redux/auth/authSelectors';
 import { getUserDataThunk } from '../redux/userData/userDataOperations';
-import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
+import PrivateRoute from './routes/PrivateRoute';
+import PublicRoute from './routes/PublicRoute';
 import SharedLoyaout from './sharedLoyaout/SharedLoyaout';
 
 const HomePage = lazy(() => import('../pages/HomePage'));
@@ -12,7 +13,7 @@ const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector((state: any) => state.auth.accessToken);
+  const isLoggedIn = useAppSelector(isExistToken);
 
   useEffect(() => {
     isLoggedIn && dispatch(getUserDataThunk());
