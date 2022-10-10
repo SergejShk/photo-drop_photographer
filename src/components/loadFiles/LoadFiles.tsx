@@ -13,6 +13,8 @@ import {
   Button,
   InputPhone,
 } from './LoadFiles.styled';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { addPhoto } from '../../redux/album/albumSlice';
 
 const LoadFiles: React.FC = () => {
   const [phone, setPhone] = useState<string>('');
@@ -20,6 +22,7 @@ const LoadFiles: React.FC = () => {
   const [phoneToSend, setPhoneToSend] = useState<string[]>([]);
   const [sendSeccessful, setSendSeccessful] = useState<string>('');
 
+  const dispatch = useAppDispatch();
   const params = useParams();
   const albumId = params.albumId;
 
@@ -61,6 +64,7 @@ const LoadFiles: React.FC = () => {
           },
         };
       } catch (error) {
+        setSendSeccessful('error');
         console.log(error);
       }
     },
@@ -75,15 +79,17 @@ const LoadFiles: React.FC = () => {
       file.xhrUpload.endpoint.split('?')[0].split('/').at(-1).split('.')[0]
     );
     ids.push(file!.id);
+    // @ts-ignore
+    dispatch(addPhoto(file.xhrUpload.endpoint));
   });
 
-  uppy.on('complete', result => {
+  uppy.on('complete', async result => {
     albumId &&
-      savePhotosWithNumbers({
+      (await savePhotosWithNumbers({
         numbers: phoneToSend,
         photos: loadedPhotos,
         albumId,
-      });
+      }));
 
     setPhoneToSend([]);
     setIsSavedPhone(false);
@@ -136,7 +142,9 @@ const LoadFiles: React.FC = () => {
       )}
 
       <TextInfo className={sendSeccessful ? 'active' : ''}>
-        Photos sent successfully
+        {sendSeccessful && !sendSeccessful.includes('error')
+          ? 'Photos sent successfully'
+          : 'Please try again'}
       </TextInfo>
     </Container>
   );

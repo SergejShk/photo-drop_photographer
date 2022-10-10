@@ -22,6 +22,7 @@ const AlbumsList: React.FC = () => {
         <List>
           {albums.map((album: Album) => {
             const { albumId, name, location, date } = album;
+
             return (
               <Item className="item" key={album.albumId}>
                 <Link className="link" to={`/albums/${albumId}`}>

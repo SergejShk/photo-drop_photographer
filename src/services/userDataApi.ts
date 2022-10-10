@@ -21,7 +21,7 @@ export const addAlbum = async (newAlbum: NewAlbum) => {
 
 export const getAlbumData = async (albumId: string) => {
   const { data } = await axios.get(`/albums/${albumId}`);
-  console.log(data.data);
+
   return data.data;
 };
 

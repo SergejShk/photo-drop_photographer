@@ -1,7 +1,7 @@
 import React, { lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { isExistToken } from '../redux/auth/authSelectors';
+import { getMustCurUser, isExistToken } from '../redux/auth/authSelectors';
 import { getUserDataThunk } from '../redux/userData/userDataOperations';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
@@ -13,7 +13,12 @@ const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isMustCurUser = useAppSelector(getMustCurUser);
   const isLoggedIn = useAppSelector(isExistToken);
+
+  useEffect(() => {
+    isMustCurUser && dispatch(getUserDataThunk());
+  }, [dispatch, isMustCurUser]);
 
   useEffect(() => {
     isLoggedIn && dispatch(getUserDataThunk());
@@ -21,32 +26,33 @@ const App: React.FC = () => {
 
   return (
     <>
-      <SharedLoyaout />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <PublicRoute>
-              <HomePage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="albums"
-          element={
-            <PrivateRoute>
-              <AlbumsPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="albums/:albumId"
-          element={
-            <PrivateRoute>
-              <AlbumPage />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<SharedLoyaout />}>
+          <Route
+            path="/auth"
+            element={
+              <PublicRoute>
+                <HomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="albums"
+            element={
+              <PrivateRoute>
+                <AlbumsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="albums/:albumId"
+            element={
+              <PrivateRoute>
+                <AlbumPage />
+              </PrivateRoute>
+            }
+          />
+        </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

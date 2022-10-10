@@ -15,11 +15,19 @@ export type NewAlbum = {
   date: string;
 };
 
-export type CurrentAlbum = {
+export type UpdatedNewAlbum = {
   albumId: string;
   name: string;
   userId: number | null;
   location: string;
   date: string;
   path: string;
+};
+
+export type CurrentAlbum = {
+  albumId: string;
+  name: string;
+  location: string;
+  date: string;
+  photos: {}[];
 };

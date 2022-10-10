@@ -8,6 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
+  width: calc(100% / 3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +68,7 @@ export const Button = styled.button`
 `;
 
 export const LabelLoadFiles = styled.label`
-  width: calc(100% / 3 - 28px);
+  width: calc(100% / 3);
   height: 50px;
   font-size: 22px;
   line-height: 1.27;
