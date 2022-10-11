@@ -4,7 +4,13 @@ import { logInThunk } from '../../redux/auth/authOperations';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { authSchema } from '../../utils/validate/authShema';
 import { isErrorState } from '../../redux/auth/authSelectors';
-import { Button, ErrorText, FormStayled, Input } from './AuthForm.styled';
+import {
+  Button,
+  ErrorText,
+  FormStayled,
+  Input,
+  Wrapper,
+} from './AuthForm.styled';
 
 const initialValues = {
   email: '',
@@ -33,20 +39,26 @@ const AuthForm: React.FC = () => {
         onSubmit={handleSubmit}
       >
         <FormStayled>
-          <Input type="text" name="email" placeholder="example@mail.com" />
-          <ErrorMessage name="email">
-            {msg => <ErrorText>{msg}</ErrorText>}
-          </ErrorMessage>
+          <Wrapper>
+            <Input type="text" name="email" placeholder="example@mail.com" />
+            <ErrorMessage name="email">
+              {msg => <ErrorText>{msg}</ErrorText>}
+            </ErrorMessage>
+          </Wrapper>
 
-          <Input type="password" name="password" placeholder="password" />
-          <ErrorMessage name="password">
-            {msg => <ErrorText>{msg}</ErrorText>}
-          </ErrorMessage>
+          <Wrapper>
+            <Input type="password" name="password" placeholder="password" />
+            <ErrorMessage name="password">
+              {msg => <ErrorText>{msg}</ErrorText>}
+            </ErrorMessage>
+          </Wrapper>
 
-          <Button type="submit">Sign in</Button>
+          <Wrapper>
+            <Button type="submit">Sign in</Button>
+            {isError && <ErrorText>Email or password is wrong</ErrorText>}
+          </Wrapper>
         </FormStayled>
       </Formik>
-      {isError && <ErrorText>Email or password is wrong</ErrorText>}
     </>
   );
 };

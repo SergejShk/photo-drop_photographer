@@ -8,6 +8,11 @@ export const FormStayled = styled(Form)`
   align-items: center;
 `;
 
+export const Wrapper = styled.div`
+  min-height: 80px;
+  width: 100%;
+`;
+
 export const Button = styled.button`
   min-width: 420px;
   height: 50px;
@@ -39,7 +44,6 @@ export const Input = styled(Field)`
   font-size: 18px;
   line-height: 1.28;
   padding: 5px 14px;
-  margin-bottom: 20px;
 
   &:hover,
   &:focus {
