@@ -1,22 +1,19 @@
-import React from 'react';
-import { Oval } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import { ContainerLoader } from './LoaderContainer.styled';
 
 const Loader: React.FC = () => {
   return (
     <ContainerLoader>
-      <Oval
-        height={50}
-        width={50}
+      <ThreeDots
+        height="80"
+        width="80"
+        radius="9"
         color="#3300cc"
+        ariaLabel="three-dots-loading"
         wrapperStyle={{}}
-        wrapperClass="loader"
         visible={true}
-        ariaLabel="oval-loading"
-        secondaryColor="#856ec7"
-        strokeWidth={2}
-        strokeWidthSecondary={2}
       />
+
     </ContainerLoader>
   );
 };

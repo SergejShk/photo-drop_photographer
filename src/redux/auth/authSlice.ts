@@ -1,4 +1,7 @@
-import { getCurrentAlbumThunk } from './../album/albumOperations';
+import {
+  addPhotoThunk,
+  getCurrentAlbumThunk,
+} from './../album/albumOperations';
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getUserDataThunk } from './../userData/userDataOperations';
 import { logInThunk } from './authOperations';
@@ -58,6 +61,12 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentAlbumThunk.fulfilled, (state, { payload }) => {
         state.error = null;
+      })
+      .addCase(addPhotoThunk.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(addPhotoThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.isLoading = false;

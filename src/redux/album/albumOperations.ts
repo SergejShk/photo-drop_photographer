@@ -39,3 +39,9 @@ export const getCurrentAlbumThunk = createAsyncThunk<
     return rejectWithValue(error.message);
   }
 });
+
+export const addPhotoThunk = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>('album/addPhoto', photo => photo);

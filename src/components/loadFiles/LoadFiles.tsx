@@ -14,7 +14,7 @@ import {
   InputPhone,
 } from './LoadFiles.styled';
 import { useAppDispatch } from '../../hooks/reduxHooks';
-import { addPhoto } from '../../redux/album/albumSlice';
+import { addPhotoThunk } from '../../redux/album/albumOperations';
 
 const LoadFiles: React.FC = () => {
   const [phone, setPhone] = useState<string>('');
@@ -79,8 +79,9 @@ const LoadFiles: React.FC = () => {
       file.xhrUpload.endpoint.split('?')[0].split('/').at(-1).split('.')[0]
     );
     ids.push(file!.id);
+
     // @ts-ignore
-    dispatch(addPhoto(file.xhrUpload.endpoint));
+    dispatch(addPhotoThunk(file.xhrUpload.endpoint));
   });
 
   uppy.on('complete', async result => {

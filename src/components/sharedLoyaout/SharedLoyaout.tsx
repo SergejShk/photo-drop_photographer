@@ -4,10 +4,11 @@ import Container from '../container/Container';
 import Loader from '../loader/Loader';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/reduxHooks';
-import { isExistToken } from '../../redux/auth/authSelectors';
+import { isExistToken, isLoadingStore } from '../../redux/auth/authSelectors';
 
 const SharedLoyaout: React.FC = () => {
   const isLoggedIn = useAppSelector(isExistToken);
+  const isLoading = useAppSelector(isLoadingStore);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -19,14 +20,20 @@ const SharedLoyaout: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <main>
-        <Container>
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </Container>
-      </main>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Header />
+          <main>
+            <Container>
+              <Suspense fallback={<Loader />}>
+                <Outlet />
+              </Suspense>
+            </Container>
+          </main>
+        </>
+      )}
     </>
   );
 };

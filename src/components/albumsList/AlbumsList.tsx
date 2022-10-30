@@ -14,6 +14,20 @@ const AlbumsList: React.FC = () => {
   const albums = useAppSelector(getAllAlbums);
   const isLoading = useAppSelector(isLoadingStore);
 
+  const formatNameAlbum = (name: string) => {
+    const maxLength = 30;
+
+    let result = '';
+
+    if (name.length <= maxLength) {
+      result = name;
+    } else {
+      result = name.slice(0, maxLength) + '...';
+    }
+
+    return result;
+  };
+
   return (
     <>
       {isLoading ? (
@@ -32,11 +46,11 @@ const AlbumsList: React.FC = () => {
                   <div>
                     <p>
                       <b>Name: </b>
-                      {name}
+                      {formatNameAlbum(name)}
                     </p>
                     <p>
                       <b>Location: </b>
-                      {location}
+                      {formatNameAlbum(location)}
                     </p>
                     <p>
                       <b>Date: </b>

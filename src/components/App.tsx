@@ -1,7 +1,7 @@
 import React, { lazy, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { getMustCurUser, isExistToken } from '../redux/auth/authSelectors';
+import { getMustCurUser } from '../redux/auth/authSelectors';
 import { getUserDataThunk } from '../redux/userData/userDataOperations';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
@@ -14,15 +14,10 @@ const AlbumPage = lazy(() => import('../pages/AlbumPage'));
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const isMustCurUser = useAppSelector(getMustCurUser);
-  const isLoggedIn = useAppSelector(isExistToken);
 
   useEffect(() => {
     isMustCurUser && dispatch(getUserDataThunk());
   }, [dispatch, isMustCurUser]);
-
-  useEffect(() => {
-    isLoggedIn && dispatch(getUserDataThunk());
-  }, [dispatch, isLoggedIn]);
 
   return (
     <>

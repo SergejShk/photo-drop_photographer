@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { CurrentAlbum } from '../../types/Album';
-import { getCurrentAlbumThunk } from './albumOperations';
+import { addPhotoThunk, getCurrentAlbumThunk } from './albumOperations';
 
 const initialState: CurrentAlbum = {
   albumId: '',
@@ -13,22 +13,21 @@ const initialState: CurrentAlbum = {
 const albumSlice = createSlice({
   name: 'album',
   initialState,
-  reducers: {
-    addPhoto(state, { payload }) {
-      state.photos = [...state.photos, { url: payload }];
-    },
-  },
+  reducers: {},
 
   extraReducers: builder => {
-    builder.addCase(getCurrentAlbumThunk.fulfilled, (state, { payload }) => {
-      state.albumId = payload.albumId;
-      state.name = payload.name;
-      state.location = payload.location;
-      state.date = payload.date;
-      state.photos = payload.photos;
-    });
+    builder
+      .addCase(getCurrentAlbumThunk.fulfilled, (state, { payload }) => {
+        state.albumId = payload.albumId;
+        state.name = payload.name;
+        state.location = payload.location;
+        state.date = payload.date;
+        state.photos = payload.photos;
+      })
+      .addCase(addPhotoThunk.fulfilled, (state, { payload }) => {
+        state.photos = [...state.photos, { url: payload }];
+      });
   },
 });
 
-export const { addPhoto } = albumSlice.actions;
 export default albumSlice.reducer;

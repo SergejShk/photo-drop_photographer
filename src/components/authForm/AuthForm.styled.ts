@@ -17,6 +17,7 @@ export const Button = styled.button`
   min-width: 420px;
   height: 50px;
   padding: 15px;
+  font-family: 'futura-pt, sans-serif';
   font-size: 22px;
   line-height: 1.27;
   display: flex;
@@ -41,6 +42,7 @@ export const Input = styled(Field)`
   background: #f4f4f4;
   border: 1px solid #eeeeee;
   border-radius: 10px;
+  font-family: 'futura-pt, sans-serif';
   font-size: 18px;
   line-height: 1.28;
   padding: 5px 14px;
@@ -52,5 +54,6 @@ export const Input = styled(Field)`
 `;
 
 export const ErrorText = styled.p`
+  font-family: 'futura-pt, sans-serif';
   color: #e70e0e;
 `;
