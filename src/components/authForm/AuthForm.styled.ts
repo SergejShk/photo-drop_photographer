@@ -41,6 +41,7 @@ export const Input = styled(Field)`
   width: calc(100% - 30px);
   height: 30px;
   background-color: #f4f4f4;
+  color: ${p => p.theme.colors.primary};
   border: 1px solid #eeeeee;
   border-radius: 10px;
   font-family: ${p => p.theme.fonts.body};
