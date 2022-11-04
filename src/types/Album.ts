@@ -9,6 +9,10 @@ export type Albums = {
   albums: Album[];
 };
 
+export type AlbumsStore = {
+  albums: Albums | {}[];
+};
+
 export type NewAlbum = {
   name: string;
   location: string;

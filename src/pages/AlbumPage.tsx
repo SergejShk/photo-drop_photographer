@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AlbumBar from '../components/albumBar/AlbumBar';
 import AlbumInfo from '../components/albumInfo/AlbumInfo';
 import LoadFiles from '../components/loadFiles/LoadFiles';
 import { useAppSelector } from '../hooks/reduxHooks';
@@ -16,7 +15,6 @@ const AlbumPage: React.FC = () => {
 
   return (
     <>
-      <AlbumBar />
       <AlbumInfo />
       <LoadFiles />
     </>

@@ -6,16 +6,9 @@ import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getUserDataThunk } from './../userData/userDataOperations';
 import { logInThunk } from './authOperations';
 import { addNewAlbumThunk } from '../album/albumOperations';
+import { AuthStore } from '../../types/authTypes';
 
-type Auth = {
-  accessToken: string;
-  isRegistered: boolean;
-  isLoggedIn: boolean;
-  isLoading: boolean;
-  error: string | null;
-};
-
-const initialState: Auth = {
+const initialState: AuthStore = {
   accessToken: '',
   isRegistered: false,
   isLoggedIn: false,

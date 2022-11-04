@@ -15,7 +15,7 @@ const AlbumsList: React.FC = () => {
   const isLoading = useAppSelector(isLoadingStore);
 
   const formatNameAlbum = (name: string) => {
-    const maxLength = 30;
+    const maxLength = 23;
 
     let result = '';
 

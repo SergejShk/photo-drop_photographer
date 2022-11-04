@@ -8,35 +8,41 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  width: calc(100% / 3);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
+
+  @media screen and (min-width: 795px) {
+    width: 345px;
+  }
 `;
 
 export const TextInfo = styled.p`
-  font-size: 18px;
-  line-height: 1.27;
-  font-weight: 600;
+  font-family: ${p => p.theme.fonts.body};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes.m};
+  line-height: ${p => p.theme.lineHeights.body};
   color: transparent;
   margin-bottom: 15px;
 
   &.active {
-    color: #3300cc;
+    color: ${p => p.theme.colors.accent};
   }
 `;
 
 export const InputPhone = styled.input`
   width: calc(100% - 30px);
-  height: 40px;
-  background: #f4f4f4;
+  height: 30px;
+  background-color: #f4f4f4;
   border: 1px solid #eeeeee;
   border-radius: 10px;
-  font-size: 18px;
-  line-height: 1.28;
-  padding: 5px 15px;
+  font-family: ${p => p.theme.fonts.body};
+  font-size: ${p => p.theme.fontSizes.m};
+  line-height: ${p => p.theme.lineHeights.body};
+  padding: 5px 14px;
   margin-bottom: 15px;
 
   &:hover,
@@ -47,44 +53,49 @@ export const InputPhone = styled.input`
 
 export const Button = styled.button`
   width: 100%;
-  height: 40px;
-  height: 50px;
-  padding: 0 16px;
-  font-size: 22px;
-  line-height: 1.27;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  background: #3300cc;
-  border-radius: 10px;
-  border: none;
   cursor: pointer;
+  background-color: ${p =>
+    p.disabled ? p.theme.colors.muted : p.theme.colors.accent};
+  border-radius: 50px;
+  font-family: ${p => p.theme.fonts.body};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes.m};
+  line-height: ${p => p.theme.lineHeights.body};
+  color: ${p => p.theme.colors.white};
+  padding: 14px 20px 13px;
+  border: none;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &:hover {
-    background-color: #24028b;
+    background-color: ${p => p.theme.colors.buttonHover};
   }
 `;
 
 export const LabelLoadFiles = styled.label`
-  width: calc(100% / 3);
-  height: 50px;
-  font-size: 22px;
-  line-height: 1.27;
+  width: calc(100% - 40px);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  background: #3300cc;
-  border-radius: 10px;
+  background-color: ${p => p.theme.colors.accent};
+  border-radius: 50px;
+  font-family: ${p => p.theme.fonts.body};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes.m};
+  line-height: ${p => p.theme.lineHeights.body};
+  color: ${p => p.theme.colors.white};
+  padding: 14px 20px 13px;
   border: none;
-  cursor: pointer;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  &:hover,
-  &:focus {
-    background-color: #24028b;
+  &:hover {
+    background-color: ${p => p.theme.colors.buttonHover};
+  }
+
+  @media screen and (min-width: 795px) {
+    width: 305px;
   }
 
   & .hidden {

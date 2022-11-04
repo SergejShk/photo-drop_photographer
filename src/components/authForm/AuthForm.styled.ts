@@ -2,49 +2,50 @@ import styled from 'styled-components';
 import { Form, Field } from 'formik';
 
 export const FormStayled = styled(Form)`
-  width: 420px;
+  max-width: 345px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 136px auto 0;
 `;
 
 export const Wrapper = styled.div`
-  min-height: 80px;
+  min-height: 65px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Button = styled.button`
-  min-width: 420px;
-  height: 50px;
-  padding: 15px;
-  font-family: 'futura-pt, sans-serif';
-  font-size: 22px;
-  line-height: 1.27;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  background: #3300cc;
-  border-radius: 10px;
-  border: none;
+  width: 100%;
   cursor: pointer;
-  transition: scale 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: ${p =>
+    p.disabled ? p.theme.colors.muted : p.theme.colors.accent};
+  border-radius: 50px;
+  font-family: ${p => p.theme.fonts.body};
+  font-weight: ${p => p.theme.fontWeights.medium};
+  font-size: ${p => p.theme.fontSizes.m};
+  line-height: ${p => p.theme.lineHeights.body};
+  color: ${p => p.theme.colors.white};
+  padding: 14px 20px 13px;
+  border: none;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &:hover,
   &:focus {
-    scale: 0.98;
+    background-color: ${p => p.theme.colors.buttonHover};
   }
 `;
 
 export const Input = styled(Field)`
   width: calc(100% - 30px);
-  height: 40px;
-  background: #f4f4f4;
+  height: 30px;
+  background-color: #f4f4f4;
   border: 1px solid #eeeeee;
   border-radius: 10px;
-  font-family: 'futura-pt, sans-serif';
-  font-size: 18px;
-  line-height: 1.28;
+  font-family: ${p => p.theme.fonts.body};
+  font-size: ${p => p.theme.fontSizes.m};
+  line-height: ${p => p.theme.lineHeights.body};
   padding: 5px 14px;
 
   &:hover,
@@ -54,6 +55,9 @@ export const Input = styled(Field)`
 `;
 
 export const ErrorText = styled.p`
-  font-family: 'futura-pt, sans-serif';
-  color: #e70e0e;
+  font-family: ${p => p.theme.fonts.body};
+  font-size: ${p => p.theme.fontSizes.xs};
+  line-height: ${p => p.theme.lineHeights.body};
+  color: ${p => p.theme.colors.errorColor};
+  text-align: center;
 `;

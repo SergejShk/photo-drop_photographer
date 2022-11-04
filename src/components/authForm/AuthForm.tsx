@@ -11,6 +11,7 @@ import {
   Input,
   Wrapper,
 } from './AuthForm.styled';
+import { AuthFormType } from '../../types/authTypes';
 
 const initialValues = {
   email: '',
@@ -27,7 +28,7 @@ const AuthForm: React.FC = () => {
     setIsError(isErrorStore);
   }, [isErrorStore]);
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: AuthFormType) => {
     dispatch(logInThunk(values));
   };
 

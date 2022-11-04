@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { getAlbum } from '../../redux/album/albumSelectors';
 import { getCurrentAlbumThunk } from '../../redux/album/albumOperations';
 import { getAllAlbums } from '../../redux/userData/userDataSelectors';
-import { TextInfo } from './AlbumInfo.styled';
+import { TextInfo, TextWrapper } from './AlbumInfo.styled';
 
 const AlbumInfo: React.FC = () => {
   const params = useParams();
@@ -21,7 +21,7 @@ const AlbumInfo: React.FC = () => {
   }, [albumId, photos, dispatch, params.albumId, albums]);
 
   return (
-    <>
+    <TextWrapper>
       <TextInfo>
         <b>Name: </b>
         {name}
@@ -38,7 +38,7 @@ const AlbumInfo: React.FC = () => {
         <b>Total photos: </b>
         {photos.length}
       </TextInfo>
-    </>
+    </TextWrapper>
   );
 };
 

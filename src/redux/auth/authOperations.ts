@@ -1,24 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { logInApi } from '../../services/authApi';
-
-type Credentials = {
-  email: string;
-  password: string;
-};
-
-type Token = {
-  token: string;
-};
+import { getUserDataApi } from '../../services/userDataApi';
+import { AuthType, Credentials } from '../../types/authTypes';
 
 export const logInThunk = createAsyncThunk<
-  Token,
+  AuthType,
   Credentials,
   { rejectValue: string }
 >('auth/login', async (credentials, { rejectWithValue }) => {
   try {
-    const data = await logInApi(credentials);
+    const dataLogIn = await logInApi(credentials);
+    const albums = await getUserDataApi(dataLogIn.token);
 
-    return data;
+    return { ...dataLogIn, albums };
   } catch (error: any) {
     return rejectWithValue(error.message);
   }
