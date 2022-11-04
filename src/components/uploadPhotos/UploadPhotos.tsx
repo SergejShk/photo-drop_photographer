@@ -11,22 +11,24 @@ import {
   BtnAddInput,
   BtnRemoveInput,
   Form,
-  InputPhone,
+  // InputPhone,
   InputWrapper,
 } from './UploadPhotos.style';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { addPhotoThunk } from '../../redux/album/albumOperations';
 
 const UploadPhotos = () => {
   const [phones, setPhones] = useState(['']);
 
+  const dispatch = useAppDispatch();
   const params = useParams();
   const albumId = params.albumId;
 
-  const handleChangeInput = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    idx: number
-  ) => {
+  const handleChangeInput = (val: string, idx: number) => {
     const inputData = [...phones];
-    inputData[idx] = e.target.value;
+    inputData[idx] = '+' + val;
     setPhones(inputData);
   };
 
@@ -78,7 +80,7 @@ const UploadPhotos = () => {
     ids.push(file!.id);
 
     // @ts-ignore
-    // dispatch(addPhotoThunk(file.xhrUpload.endpoint));
+    dispatch(addPhotoThunk(file.xhrUpload.endpoint));
   });
 
   uppy.on('complete', async result => {
@@ -96,14 +98,17 @@ const UploadPhotos = () => {
 
   return (
     <>
+      <BtnAddInput type="button" onClick={onClickAddPhone}>
+        Add phone
+      </BtnAddInput>
+
       <Form>
         {phones.map((phone, idx) => (
           <InputWrapper key={idx}>
-            <InputPhone
-              type="tel"
-              placeholder="Enter phone"
+            <PhoneInput
+              country="us"
               value={phone}
-              onChange={e => handleChangeInput(e, idx)}
+              onChange={val => handleChangeInput(val, idx)}
             />
 
             <BtnRemoveInput
@@ -115,10 +120,6 @@ const UploadPhotos = () => {
           </InputWrapper>
         ))}
       </Form>
-
-      <BtnAddInput type="button" onClick={onClickAddPhone}>
-        Add phone
-      </BtnAddInput>
 
       <Dashboard uppy={uppy} plugins={['Webcam']} />
     </>

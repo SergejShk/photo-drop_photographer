@@ -8,28 +8,15 @@ export const Form = styled.form`
 
 export const InputWrapper = styled.div`
   position: relative;
-  width: calc(345px - 60px);
+  /* width: calc(345px - 60px); */
+  width: 345px;
+
+  & .react-tel-input .form-control {
+    width: 100%;
+  }
 
   @media screen and (min-width: 795px) {
     width: 345px;
-  }
-`;
-
-export const InputPhone = styled.input`
-  width: calc(345px - 60px);
-  height: 30px;
-  background-color: #f4f4f4;
-  color: ${p => p.theme.colors.primary};
-  border: 1px solid #eeeeee;
-  border-radius: 10px;
-  font-family: ${p => p.theme.fonts.body};
-  font-size: ${p => p.theme.fontSizes.m};
-  line-height: ${p => p.theme.lineHeights.body};
-  padding: 5px 44px 5px 14px;
-
-  &:hover,
-  &:focus {
-    outline: 1px solid #3300cc;
   }
 `;
 
@@ -37,7 +24,7 @@ export const BtnRemoveInput = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -60px;
+  right: 0;
   height: calc(100% - 10px);
   width: 30px;
   font-weight: 600;
@@ -71,7 +58,7 @@ export const BtnAddInput = styled.button`
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   display: block;
-  margin: 10px auto 10px;
+  margin: 15px auto 15px;
 
   &:hover {
     background-color: ${p => p.theme.colors.buttonHover};
