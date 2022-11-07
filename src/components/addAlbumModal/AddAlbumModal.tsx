@@ -64,19 +64,24 @@ const AddAlbumModal: React.FC<IProps> = ({ closeModal }) => {
             name="name"
             value={name}
             placeholder="Name"
+            required
             onChange={handleChange}
           />
+
           <Input
             type="text"
             name="location"
             value={location}
             placeholder="Location"
+            required
             onChange={handleChange}
           />
+
           <Input
             className="date"
             type="date"
             name="date"
+            required
             value={date}
             onChange={handleChange}
           />
