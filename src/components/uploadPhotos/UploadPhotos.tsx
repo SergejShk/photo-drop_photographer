@@ -10,6 +10,7 @@ import { savePhotosWithNumbers } from '../../services/userDataApi';
 import {
   BtnAddInput,
   BtnRemoveInput,
+  DashboardWrapper,
   Form,
   // InputPhone,
   InputWrapper,
@@ -96,6 +97,8 @@ const UploadPhotos = () => {
     ids = [];
   });
 
+  const validatedPhones = phones.filter(phone => phone.length > 6);
+
   return (
     <>
       <BtnAddInput type="button" onClick={onClickAddPhone}>
@@ -121,7 +124,11 @@ const UploadPhotos = () => {
         ))}
       </Form>
 
-      <Dashboard uppy={uppy} plugins={['Webcam']} />
+      {validatedPhones.length === phones.length && (
+        <DashboardWrapper>
+          <Dashboard uppy={uppy} plugins={['Dashboard']} />
+        </DashboardWrapper>
+      )}
     </>
   );
 };

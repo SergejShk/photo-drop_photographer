@@ -63,4 +63,35 @@ export const BtnAddInput = styled.button`
   &:hover {
     background-color: ${p => p.theme.colors.buttonHover};
   }
+  &:focus {
+    background-color: ${p => p.theme.colors.accent};
+  }
+`;
+
+export const DashboardWrapper = styled.div`
+  padding: 15px 0;
+
+  & .uppy-StatusBar.is-waiting .uppy-StatusBar-actions {
+    justify-content: center;
+  }
+
+  & .uppy-StatusBar.is-waiting .uppy-StatusBar-actionBtn--upload {
+    background-color: ${p => p.theme.colors.accent};
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: ${p => p.theme.fonts.body};
+    font-weight: ${p => p.theme.fontWeights.medium};
+    font-size: ${p => p.theme.fontSizes.m};
+    line-height: ${p => p.theme.lineHeights.body};
+    border-radius: 50px;
+    outline: none;
+
+    &:hover {
+      background-color: ${p => p.theme.colors.buttonHover};
+    }
+
+    &:focus {
+      background-color: ${p => p.theme.colors.accent};
+      box-shadow: none;
+    }
+  }
 `;
