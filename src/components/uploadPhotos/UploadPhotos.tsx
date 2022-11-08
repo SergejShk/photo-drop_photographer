@@ -19,6 +19,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { addPhotoThunk } from '../../redux/album/albumOperations';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const UploadPhotos = () => {
   const [phones, setPhones] = useState(['']);
@@ -110,16 +111,34 @@ const UploadPhotos = () => {
           <InputWrapper key={idx}>
             <PhoneInput
               country="us"
+              enableSearch
+              disableSearchIcon
               value={phone}
               onChange={val => handleChangeInput(val, idx)}
+              inputStyle={{
+                background: '#F4F4F4',
+                width: '287px',
+                padding: '5px 30px 5px 10px',
+                marginLeft: '58px',
+                border: '1px solid #EEEEEE',
+                borderRadius: '10px',
+                color: '#262626',
+              }}
+              buttonStyle={{
+                background: '#F4F4F4',
+                border: '1px solid #EEEEEE',
+                borderRadius: '10px',
+                width: '50px',
+                paddingLeft: '3px',
+              }}
             />
 
             {phones.length > 1 && (
               <BtnRemoveInput
                 type="button"
-                onClick={e => onClickRemovePhone(idx)}
+                onClick={() => onClickRemovePhone(idx)}
               >
-                X
+                <AiOutlineClose />
               </BtnRemoveInput>
             )}
           </InputWrapper>

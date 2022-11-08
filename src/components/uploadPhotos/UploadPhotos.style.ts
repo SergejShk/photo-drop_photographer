@@ -8,15 +8,16 @@ export const Form = styled.form`
 
 export const InputWrapper = styled.div`
   position: relative;
-  /* width: calc(345px - 60px); */
   width: 345px;
-
-  & .react-tel-input .form-control {
-    width: 100%;
-  }
 
   @media screen and (min-width: 795px) {
     width: 345px;
+  }
+
+  & .react-tel-input .flag-dropdown.open .selected-flag,
+  & .react-tel-input .selected-flag:hover,
+  .react-tel-input .selected-flag:focus {
+    background: #f4f4f4;
   }
 `;
 
@@ -32,6 +33,9 @@ export const BtnRemoveInput = styled.button`
   color: ${p => p.theme.colors.primary};
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   @media screen and (min-width: 795px) {
