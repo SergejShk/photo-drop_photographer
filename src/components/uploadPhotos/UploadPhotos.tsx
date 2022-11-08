@@ -114,12 +114,14 @@ const UploadPhotos = () => {
               onChange={val => handleChangeInput(val, idx)}
             />
 
-            <BtnRemoveInput
-              type="button"
-              onClick={e => onClickRemovePhone(idx)}
-            >
-              X
-            </BtnRemoveInput>
+            {phones.length > 1 && (
+              <BtnRemoveInput
+                type="button"
+                onClick={e => onClickRemovePhone(idx)}
+              >
+                X
+              </BtnRemoveInput>
+            )}
           </InputWrapper>
         ))}
       </Form>
